@@ -1,7 +1,4 @@
 version: '3.3'
-configs:
-  recovery:
-    file: recovery.conf
 
 services:
   psrdmaster:
