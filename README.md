@@ -39,3 +39,44 @@ cp recovery.conf /tmp/psrd-standby2/
 ./start-standby2.sh
 ```
 
+Now, let's connect to `psrd-master`, create some data.
+
+```
+psql -U postgres -h localhost -p 5432
+  CREATE DATABASE yolo;
+  \c yolo;
+  yolo=# CREATE TABLE users (id integer, name varchar(40));
+  yolo=# insert into users values(1,'yolo');
+  yolo=# insert into users values(2,'bolo');
+  yolo=# insert into users values(3,'trolo');
+```
+
+Let's see if `psrd-standby1` has any data!? 
+
+```
+psql -U postgres -h localhost -p 5433
+  \c yolo;
+  yolo=# select * from distributors;
+   did |  name
+  -----+---------
+     1 | yolo
+     2 | bolo
+     3 | trolo
+```
+
+Yeah :tada: What about `psrd-standby2`??
+
+```
+psql -U postgres -h localhost -p 5434
+  \c yolo;
+  yolo=# select * from distributors;
+   did |  name
+  -----+---------
+     1 | yolo
+     2 | bolo
+     3 | trolo
+```
+
+Awesome :heart-eyes: 
+
+We now have a HA PostgreSQL setup using streaming replication :rocket:
