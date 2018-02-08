@@ -77,6 +77,6 @@ psql -U postgres -h localhost -p 5434
      3 | trolo
 ```
 
-Awesome :heart_eyes: 
+Awesome :heart_eyes: :tada: :tada: :tada: 
 
 We now have a HA PostgreSQL setup using streaming replication :rocket:
